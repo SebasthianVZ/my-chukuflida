@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>❤️Para Mi Chukuflida ❤️</title>
+<style>
+  body {
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    /* Fondo degradado de amor: rosa suave a naranja claro */
+    background: linear-gradient(to right, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
+    color: white;
+    text-align: center;
+    overflow: hidden; /* Importante para la lluvia de corazones */
+    position: relative;
+  }
+  .heart-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none; /* Permite interactuar con los elementos debajo */
+    overflow: hidden;
+    z-index: 1; /* Fondo detrás del contenido principal */
+  }
+  .heart {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 50% 50% 0 50%;
+    transform: rotate(-45deg);
+    opacity: 0; 
+    animation: fallHeart 15s infinite linear;
+  }
+  .heart::before,
+  .heart::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: inherit;
+    border-radius: 50%;
+  }
+  .heart::before {
+    top: -50%;
+    left: 0;
+  }
+  .heart::after {
+    top: 0;
+    left: 50%;
+  }
+
+  /* Animación de caída y desvanecimiento */
+  @keyframes fallHeart {
+    0% { transform: translateY(-10vh) rotate(-45deg) scale(0.5); opacity: 0; }
+    5% { opacity: 0.8; }
+    100% { transform: translateY(105vh) rotate(-45deg) scale(1.5); opacity: 0; }
+  }
+
+  /* Contenido principal - Asegura que el contenido esté sobre los corazones */
+  h1, .quote, .love-image, audio {
+    position: relative;
+    z-index: 10; 
+  }
+
+  /* Estilos del Audio */
+  audio {
+    width: 80%;
+    max-width: 400px;
+    margin-top: 30px; /* Margen superior para separarlo del borde de la pantalla */
+    margin-bottom: 40px; /* Espacio antes del título */
+  }
+
+  /* Estilos del resto del contenido */
+  h1 {
+    font-size: 4em;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  }
+  .quote {
+    font-size: 3em;
+    margin-bottom: 30px; 
+    font-style: italic;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  }
+  .love-image {
+    max-width: 50%; 
+    height: auto;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    margin-bottom: 30px;
+  }
+</style>
+</head>
+<body>
+  <div class="heart-container" id="heart-field"></div>
+
+  <audio controls loop autoplay>
+    <source src="tu-cancion-aqui.mp3" type="audio/mpeg">
+    Tu navegador no soporta el elemento de audio.
+  </audio>
+
+  <h1>¡❤️Te amo Mi Chukuflida ❤️!</h1>
+  <p class="quote">"❤️En la mañana sale el sol en la noche la luna y y una mujer tan hermosa como tú ninguna❤️"</p>
+
+  <img src="tu-foto-aqui.jfif" alt="Una imagen de amor" class="love-image">
+
+  <script>
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      
+      const size = Math.random() * 25 + 10; 
+      heart.style.width = size + 'px'; 
+      heart.style.height = size + 'px';
+      
+      heart.style.left = Math.random() * 100 + 'vw';
+      
+      heart.style.animationDuration = Math.random() * 5 + 10 + 's';
+      heart.style.animationDelay = Math.random() * 5 + 's'; 
+      
+      heart.style.opacity = Math.random() * 0.7 + 0.3;
+      
+      document.getElementById('heart-field').appendChild(heart);
+
+      heart.addEventListener('animationend', () => {
+        heart.remove();
+      });
+    }
+
+    // Crea muchos corazones rápidamente para iniciar la "lluvia"
+    for (let i = 0; i < 50; i++) {
+        createHeart();
+    }
+    // Luego sigue creando corazones constantemente
+    setInterval(createHeart, 500); 
+  </script>
+</body>
+</html>
